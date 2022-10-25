@@ -1,46 +1,58 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../data/data.dart';
+import '../widgets/swipe_widget.dart';
+
 class SwipeScreen extends StatelessWidget {
-  const SwipeScreen({Key? key}) : super(key: key);
+  SwipeScreen({Key? key}) : super(key: key);
+  final Data newsData = Data();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         body: SafeArea(
-          child: GestureDetector(
-            onTap: () {
-              if (kDebugMode) {
-                print('tapped');
-              }
-            },
-            child: PageView(
-              scrollDirection: Axis.vertical,
-              children: const [
-                Card(
-                  color: Colors.blueAccent,
-                  child: Center(
-                    child: Text(
-                      'Page #1',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ),
-                ),
-                Card(
-                  color: Colors.red,
-                  child: Center(
-                    child: Text(
-                      'Page #2',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          child: Column(
+            children: [
+              _getSwipeList(),
+            ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildSwipeListItem(
+      BuildContext context, AsyncSnapshot<dynamic> snapshot, int index) {
+    final newsItem = snapshot.data[index].title;
+    return swipeWidget(context, newsItem);
+  }
+
+  Widget _buildSwipeList(
+      BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+    return PageView.builder(
+      scrollDirection: Axis.vertical,
+      itemCount: snapshot.hasData ? snapshot.data.length : 0,
+      itemBuilder: (context, index) {
+        return _buildSwipeListItem(context, snapshot, index);
+      },
+    );
+  }
+
+  Widget _getSwipeList() {
+    return Expanded(
+      child: FutureBuilder(
+          future: newsData.getNewsList(),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: LinearProgressIndicator(),
+              );
+            }
+            else {
+             return _buildSwipeList(context, snapshot);
+            }
+          }),
     );
   }
 }
