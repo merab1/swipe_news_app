@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../data/data.dart';
 import '../widgets/swipe_widget.dart';
+import 'article_screen.dart';
 
 class SwipeScreen extends StatelessWidget {
   SwipeScreen({Key? key}) : super(key: key);
@@ -34,7 +35,19 @@ class SwipeScreen extends StatelessWidget {
       scrollDirection: Axis.vertical,
       itemCount: snapshot.hasData ? snapshot.data.length : 0,
       itemBuilder: (context, index) {
-        return _buildSwipeListItem(context, snapshot, index);
+        return GestureDetector(
+          child: _buildSwipeListItem(context, snapshot, index),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return ArticleScreen(content: snapshot.data,);
+                },
+              ),
+            );
+          },
+        );
       },
     );
   }
@@ -48,9 +61,8 @@ class SwipeScreen extends StatelessWidget {
               return const Center(
                 child: LinearProgressIndicator(),
               );
-            }
-            else {
-             return _buildSwipeList(context, snapshot);
+            } else {
+              return _buildSwipeList(context, snapshot);
             }
           }),
     );
