@@ -42,7 +42,7 @@ class SwipeScreen extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return ArticleScreen(content: snapshot.data[index]);
+                  return ArticleScreen(newsModel: snapshot.data[index]);
                 },
               ),
             );

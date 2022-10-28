@@ -5,13 +5,13 @@ import '../data/data.dart';
 import '../widgets/article_widget.dart';
 
 class ArticleScreen extends StatelessWidget {
-  ArticleScreen({Key? key, required this.content}) : super(key: key);
-  final NewsModel content;
+  ArticleScreen({Key? key, required this.newsModel}) : super(key: key);
+  final NewsModel newsModel;
   final Data newsData = Data();
 
   @override
   Widget build(BuildContext context) {
-    return articleWidget(context, content.content);
+    return articleWidget(context, newsModel.content);
   }
 
 /*  Widget _article(
