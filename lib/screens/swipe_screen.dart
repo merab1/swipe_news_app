@@ -25,8 +25,9 @@ class SwipeScreen extends StatelessWidget {
 
   Widget _buildSwipeListItem(
       BuildContext context, AsyncSnapshot<dynamic> snapshot, int index) {
-    final newsItem = snapshot.data[index].title;
-    return swipeWidget(context, newsItem);
+    final newsItemTitle = snapshot.data[index].title;
+    final newsItemImage = snapshot.data[index].urlToImage;
+    return swipeWidget(context, newsItemTitle, newsItemImage);
   }
 
   Widget _buildSwipeList(
