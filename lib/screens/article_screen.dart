@@ -11,7 +11,7 @@ class ArticleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return articleWidget(context, newsModel.content);
+    return articleWidget(context, newsModel.title, newsModel.content, newsModel.urlToImage);
   }
 
 /*  Widget _article(
