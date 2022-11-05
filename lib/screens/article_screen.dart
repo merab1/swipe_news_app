@@ -12,22 +12,8 @@ class ArticleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: articleWidget(context, newsModel.title, newsModel.content,
-          newsModel.urlToImage, newsModel.url),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return WebView(
-                initialUrl: newsModel.url,
-              );
-            },
-          ),
-        );
-      },
-    );
+    return articleWidget(context, newsModel.title, newsModel.content,
+        newsModel.urlToImage, newsModel.url);
   }
 
 /*  Widget _article(

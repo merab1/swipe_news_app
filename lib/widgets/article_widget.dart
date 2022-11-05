@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 Widget articleWidget(BuildContext context, String title, String content,
     String? urlToImage, String url) {
@@ -61,6 +62,19 @@ Widget articleWidget(BuildContext context, String title, String content,
             style: const TextStyle(
               fontSize: 16,
             ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return WebView(
+                  initialUrl: url,
+                );
+              }));
+            },
+            child: const Text('For whole article press here'),
           ),
         ],
       ),
