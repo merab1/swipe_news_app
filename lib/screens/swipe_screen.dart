@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 import '../data/data.dart';
 import '../widgets/swipe_widget.dart';
@@ -43,7 +44,9 @@ class SwipeScreen extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return ArticleScreen(newsModel: snapshot.data[index]);
+                  return WebView(
+                    initialUrl: snapshot.data[index].url,
+                  );
                 },
               ),
             );

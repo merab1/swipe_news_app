@@ -68,11 +68,16 @@ Widget articleWidget(BuildContext context, String title, String content,
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return WebView(
-                  initialUrl: url,
-                );
-              }));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return WebView(
+                      initialUrl: url,
+                    );
+                  },
+                ),
+              );
             },
             child: const Text('For whole article press here'),
           ),
